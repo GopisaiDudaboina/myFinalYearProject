@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>ChurnIntel AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-badge">⟋</span>
+        <div class="brand-text">
+          <div class="brand-title">ChurnIntel AI</div>
+          <div class="brand-subtitle">Customer Retention Intelligence</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="ghost-btn ghost-top" href="/predict">New Prediction</a>
+      </div>
+    </header>
+
+    <main class="layout single">
+      <section class="panel center">
+        <div class="card output-header">
+          <div>
+            <h2>Prediction Output</h2>
+            <p>Churn probability, key risk factors, and retention strategies.</p>
+          </div>
+          <a class="ghost-btn" href="/">Back to Welcome</a>
+        </div>
+
+        <div class="results">
+          <div class="grid">
+            <div class="card">
+              <div class="card-title">Churn Probability</div>
+              {% if prediction_text %}
+              <div class="score">{{ prediction_text }}</div>
+              <div class="risk">{{ risk_level }}</div>
+              {% else %}
+              <div class="empty">
+                No prediction available. Please run a prediction first.
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="card">
+              <div class="card-title">Key Risk Factors (SHAP)</div>
+              {% if shap_plot %}
+              <img class="shap-img" src="{{ url_for('static', filename=shap_plot) }}" alt="SHAP explanation"/>
+              {% else %}
+              <div class="empty">
+                SHAP explanation not available.
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Gemini Retention Strategies</div>
+            {% if retention_action %}
+            <div class="strategy">
+              {{ retention_action | replace('\n', '<br>') | safe }}
+            </div>
+            {% else %}
+            <div class="empty">
+              Strategies will appear after prediction.
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
