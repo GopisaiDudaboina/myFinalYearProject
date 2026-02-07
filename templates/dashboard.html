@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Dashboard | ChurnIntel AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="loader-overlay" id="loader">
+    <div class="spinner"></div>
+    <div class="loading-text">Analyzing Customer Data...</div>
+  </div>
+
+  <div class="app-shell">
+    <nav class="nav-glass">
+      <a href="/" class="brand">
+        <div class="logo-icon">C</div>
+        <span>ChurnIntel AI</span>
+      </a>
+    </nav>
+
+    <main class="layout">
+      <div class="glass-panel" style="max-width: 1000px; margin: 0 auto; width: 100%;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 style="font-size: 28px; margin: 0 0 8px;">Customer Analysis</h2>
+          <p style="color: var(--text-muted); margin: 0;">Analyze single customer or batch file.</p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div class="tabs-container">
+              <button type="button" class="tab-btn active" data-domain="telecom">Telecom</button>
+              <button type="button" class="tab-btn" data-domain="bank">Banking</button>
+              <button type="button" class="tab-btn" data-domain="retail">Retail</button>
+            </div>
+            
+            <br>
+
+            <div style="display: inline-flex; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <button type="button" class="btn btn-ghost" id="singleModeBtn" style="color: var(--accent-primary); border-bottom: 2px solid var(--accent-primary);">Single Profile</button>
+                <button type="button" class="btn btn-ghost" id="batchModeBtn">Batch Upload (CSV)</button>
+            </div>
+        </div>
+
+        <form action="/predict/single" method="post" id="predictForm" onsubmit="showLoader()">
+          <input type="hidden" name="domain" id="domain" value="telecom">
+
+          <div id="inputFields" class="input-grid">
+            </div>
+
+          <div style="border-top: 1px solid var(--border); margin-top: 32px; padding-top: 32px; display: flex; justify-content: flex-end; gap: 16px;">
+            <button type="button" class="btn btn-secondary" id="resetBtn">Reset Data</button>
+            <button type="submit" class="btn btn-primary">Analyze Risk &rarr;</button>
+          </div>
+        </form>
+
+        <form action="/predict/batch" method="post" enctype="multipart/form-data" id="batchForm" style="display: none; animation: fadeUp 0.4s ease-out;" onsubmit="showLoader('Processing Batch Data...')">
+            <input type="hidden" name="domain" id="batchDomain" value="telecom">
+            
+            <div style="padding: 50px; border: 2px dashed var(--border); border-radius: 16px; margin-bottom: 20px; text-align: center; cursor: pointer; transition: all 0.2s;" onclick="document.getElementById('csvFile').click()" onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.background='var(--bg-input)'" onmouseout="this.style.borderColor='var(--border)'; this.style.background='transparent'">
+                <div style="font-size: 48px; margin-bottom: 16px;">📂</div>
+                <h3 style="margin: 0 0 8px;">Upload CSV File</h3>
+                <p style="color: var(--text-muted); margin: 0;">Drag & drop or click to browse</p>
+                <input type="file" name="file" id="csvFile" accept=".csv" required style="display: none;" onchange="document.getElementById('fileName').innerText = 'Selected: ' + this.files[0].name">
+                <div id="fileName" style="color: var(--accent-primary); margin-top: 16px; font-weight: 600;"></div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px;">Process Batch & Download Results ⬇</button>
+                <p style="font-size: 13px; color: var(--text-muted);">
+                   Not sure about the format? 
+                   <a href="/api/template/telecom" id="templateBtn" style="color: var(--accent-primary); text-decoration: underline;">Download CSV Template</a>
+                </p>
+            </div>
+        </form>
+
+      </div>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    function showLoader(text) {
+        const loader = document.getElementById('loader');
+        if(text) document.querySelector('.loading-text').innerText = text;
+        loader.classList.add('active');
+    }
+  </script>
+</body>
+</html>

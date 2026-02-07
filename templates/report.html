@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Analysis | ChurnIntel AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="nav-glass">
+      <a href="/" class="brand">
+        <div class="logo-icon">C</div>
+        <span>ChurnIntel AI</span>
+      </a>
+      <a href="/dashboard" class="btn btn-ghost">New Prediction</a>
+    </nav>
+
+    <main class="layout">
+      
+      <div style="margin-bottom: 24px;">
+        <div class="glass-panel" style="padding: 20px 32px; border-left: 4px solid var(--accent-secondary); display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center;">
+           
+           <div style="text-align: left;">
+             <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px;">Model Used</div>
+             <div style="font-size: 16px; font-weight: 600; color: var(--text-main);">{{ model_name }}</div>
+           </div>
+           
+           <div style="text-align: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border);">
+             <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px;">Test Accuracy</div>
+             <div style="font-size: 20px; font-weight: 700; color: var(--success);">{{ accuracy }}%</div>
+           </div>
+
+           <div style="text-align: right;">
+             <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px;">Training Data</div>
+             <div style="font-size: 16px; font-weight: 600; color: var(--text-main);">{{ samples }} rows</div>
+           </div>
+        </div>
+      </div>
+
+      <div class="report-top-grid">
+        <div class="glass-panel metric-box">
+          <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 20px;">Churn Probability</div>
+          {% if score %}
+            <div class="score-big">{{ score }}</div>
+            <div class="risk-badge" style="
+                background: {% if risk == 'High' %} rgba(239, 68, 68, 0.2) {% elif risk == 'Medium' %} rgba(245, 158, 11, 0.2) {% else %} rgba(16, 185, 129, 0.2) {% endif %};
+                color: {% if risk == 'High' %} #ef4444 {% elif risk == 'Medium' %} #f59e0b {% else %} #10b981 {% endif %};
+            ">
+              {{ risk }} Risk
+            </div>
+            <p style="margin-top: 24px; color: var(--text-muted); font-size: 14px;">
+              Based on behavioral analysis of recent interactions and profile data.
+            </p>
+          {% else %}
+            <div class="text-muted">No Data</div>
+          {% endif %}
+        </div>
+
+        <div class="glass-panel shap-box">
+          <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="margin: 0; font-size: 16px;">Risk Factor Analysis</h3>
+            <span style="font-size: 12px; color: var(--text-muted);">SHAP Explanation</span>
+          </div>
+          <div class="shap-container" style="width: 100%; flex: 1; display: flex; align-items: center; justify-content: center;">
+            {% if chart %}
+              <img src="{{ url_for('static', filename=chart) }}" alt="SHAP Plot" style="max-height: 280px; width: auto; max-width: 100%;"/>
+            {% else %}
+              <div style="color: var(--text-muted);">Graphic unavailable.</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel report-bottom-full">
+        <h3 style="margin-top: 0; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+          <span style="background: var(--accent-primary); width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span>
+          AI Retention Strategy
+        </h3>
+        {% if strategy %}
+          <div class="strategy-box">
+            {{ strategy | replace('\n', '<br>') | safe }}
+          </div>
+        {% else %}
+          <p style="color: var(--text-muted);">Run a prediction to see strategies.</p>
+        {% endif %}
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>

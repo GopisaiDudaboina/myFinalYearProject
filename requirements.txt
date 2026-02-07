@@ -1,0 +1,12 @@
+flask
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+shap
+catboost
+xgboost
+lightgbm
+google-genai
+python-dotenv

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>ChurnIntel AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="nav-glass">
+      <div class="brand">
+        <div class="logo-icon">C</div>
+        <span>ChurnIntel AI</span>
+      </div>
+      <a href="/dashboard" class="btn btn-ghost">Launch App &rarr;</a>
+    </nav>
+
+    <main class="layout">
+      <div class="hero-container">
+        <div class="risk-badge" style="margin-bottom: 20px; color: var(--accent-primary); background: rgba(249,115,22,0.1);">v3.0 Enterprise</div>
+        <h1 class="mega-title">Stop Churn<br>Before It Happens.</h1>
+        <p class="hero-desc">
+          The advanced AI platform that predicts customer retention risks with SHAP explainability. 
+          Analyze Telecom, Banking, and Retail domains in real-time.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <a href="/dashboard" class="btn btn-primary">Start Prediction</a>
+          <a href="#" class="btn btn-secondary">Documentation</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
