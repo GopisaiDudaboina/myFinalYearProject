@@ -1,4 +1,4 @@
-# 🔮 ChurnIntel AI
+# ChurnIntel AI
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-Web%20App-green?style=for-the-badge&logo=flask)
@@ -11,20 +11,20 @@ Unlike traditional predictors, this tool provides **Explainable AI (XAI)** insig
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-* **⚡ Multi-Domain Support:** specialized ML models for Telecom, Banking, and Retail sectors.
-* **🧠 Explainable AI (SHAP):** Visualizes the exact reasons for churn (e.g., "High Monthly Charges", "Low Satisfaction Score").
-* **🤖 Generative AI Strategies:** Integrated with **Google Gemini 2.0 Flash** to automatically generate personalized retention plans for at-risk customers.
-* **📂 Dual-Mode Prediction:**
+* **Multi-Domain Support:** specialized ML models for Telecom, Banking, and Retail sectors.
+* **Explainable AI (SHAP):** Visualizes the exact reasons for churn (e.g., "High Monthly Charges", "Low Satisfaction Score").
+* **Generative AI Strategies:** Integrated with **Google Gemini 2.0 Flash** to automatically generate personalized retention plans for at-risk customers.
+* **Dual-Mode Prediction:**
     * **Single Mode:** Interactive form for individual customer analysis.
     * **Batch Mode:** Upload CSV files to process thousands of customers at once.
-* **🛡️ Secure & Optimized:** Uses environment variables for API security and auto-cleans visualization files to save storage.
-* **🎨 Modern UI:** Features a "Midnight Fire" glassmorphism design with responsive animations and loading states.
+* **Secure & Optimized:** Uses environment variables for API security and auto-cleans visualization files to save storage.
+* **Modern UI:** Features a "Midnight Fire" glassmorphism design with responsive animations and loading states.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Frontend:** HTML5, CSS3 (Glassmorphism), JavaScript
 * **Backend:** Flask (Python)
@@ -59,14 +59,14 @@ ChurnIntel-AI/
     └── report.html          # Analysis Results Page
 ```
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 Follow these steps to run the project locally on your machine.
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/churnintel-ai.git](https://github.com/your-username/churnintel-ai.git)
-cd churnintel-ai
+git clone [https://github.com/GopisiaDudaboina/myFinalYearProject.git](https://github.com/GopisiaDudaboina/myFinalYearProject.git)
+cd myFinalYearProject 
 ```
 
 ### 2. Install Dependencies
@@ -96,7 +96,7 @@ python app.py
 ```
 Open your browser and visit: http://127.0.0.1:5000
 
-## 📊 How to Use
+## How to Use
 
 Single Prediction
 1. Go to the Dashboard.
@@ -120,11 +120,11 @@ Batch Prediction
 
 5. The app will return a downloadable CSV with Churn Scores and Risk Categories for every customer.
 
-## 🛡️ Security Note
+## Security Note
 
 This project uses a .env file to store sensitive API keys. Do not upload your .env file to GitHub. The .gitignore file included in this repository prevents this automatically.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
